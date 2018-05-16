@@ -439,6 +439,12 @@ class LaTeXTranslator(nodes.NodeVisitor):
                    and 'fontpkg' not in builder.config.latex_elements:
                     self.elements['fontpkg'] = ''
 
+                # zzq
+                if builder.config.language == 'zh_CN':
+                    self.elements['babel'] = ''
+                    self.elements['inputenc'] = ''
+                    self.elements['utf8extra'] = ''
+
                 # pTeX (Japanese TeX) for support
                 if builder.config.language == 'ja':
                     # use dvipdfmx as default class option in Japanese

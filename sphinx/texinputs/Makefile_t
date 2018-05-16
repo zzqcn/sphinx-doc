@@ -13,7 +13,8 @@ LATEXOPTS =
 FMT = pdf
 
 LATEX = latex
-PDFLATEX = {{ latex_engine }}
+#PDFLATEX = {{ latex_engine }}
+PDFLATEX = xelatex
 MAKEINDEX = makeindex
 
 {% if latex_engine == 'platex' %}
