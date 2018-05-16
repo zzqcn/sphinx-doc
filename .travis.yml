@@ -1,0 +1,48 @@
+language: python
+sudo: false
+cache:
+  directories:
+    - $HOME/.cache/pip
+python:
+  - "pypy"
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "nightly"
+env:
+  global:
+    - TEST='-v --durations 25'
+    - PYTHONFAULTHANDLER=x
+    - PYTHONWARNINGS=all
+  matrix:
+    - DOCUTILS=0.12
+    - DOCUTILS=0.13.1
+matrix:
+  exclude:
+    - python: "3.4"
+      env: DOCUTILS=0.12
+    - python: "3.5"
+      env: DOCUTILS=0.12
+    - python: nightly
+      env: DOCUTILS=0.12
+    - python: pypy
+      env: DOCUTILS=0.12
+addons:
+  apt:
+    packages:
+    - graphviz
+    - texlive-latex-recommended
+    - texlive-latex-extra
+    - texlive-fonts-recommended
+    - texlive-fonts-extra
+    - texlive-xetex
+    - lmodern
+install:
+  - pip install -U pip setuptools
+  - pip install docutils==$DOCUTILS
+  - pip install -r test-reqs.txt
+script:
+  - flake8
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then make style-check test-async; fi
+  - if [[ $TRAVIS_PYTHON_VERSION != '3.6' ]]; then make test; fi
