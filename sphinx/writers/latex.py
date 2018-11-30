@@ -440,7 +440,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
                     self.elements['fontpkg'] = ''
 
                 # zzq
-                if builder.config.language == 'zh_CN':
+                if builder.config.language == 'zh':
                     self.elements['babel'] = ''
                     self.elements['inputenc'] = ''
                     self.elements['utf8extra'] = ''
